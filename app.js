@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
+const { send } = require("process");
 
 const app = express();
 
@@ -28,6 +29,23 @@ app.get("/articles",function(req,res){
         res.send(err);   
     });
 });
+
+app.post("/articles",function(req,res){
+    
+    const newArticle = new Article({
+        title: req.query.title,
+        content: req.query.content
+    });
+    newArticle.save(function(err){
+        if(!err){
+            res.send("Successfully added a new article")
+        }
+        else{
+            res.send("chombu");
+        }
+    });
+});
+
 
 
 app.listen(3000, function() {
