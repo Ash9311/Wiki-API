@@ -26,7 +26,9 @@ app.route("/articles").get(function(req,res){
         if(!err){
             res.send(foundArticles);
         }
+        else{
         res.send(err);   
+        }
     });
 })
 
