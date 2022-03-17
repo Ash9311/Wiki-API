@@ -28,7 +28,7 @@ app.route("/articles").get(function(req,res){
         }
         else{
         res.send(err);   
-        }
+        }   
     });
 })
 
@@ -57,6 +57,18 @@ app.route("/articles").get(function(req,res){
             res.send(err);
         }
     })
+});
+
+//requests
+app.route("/articles/:articleTitle").get(function(req,res){
+    Article.findOne({title: req.params.articleTitle},function(err,foundArticles){
+        if(foundArticles){
+            res.send(foundArticles);
+        }
+        else{
+            res.send("no articles was found")
+        }
+    });
 });
 
 app.listen(3000, function() {
